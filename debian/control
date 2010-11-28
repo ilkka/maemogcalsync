@@ -1,0 +1,30 @@
+Source: maemogcalsync
+Section: python
+Priority: extra
+Maintainer: Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), python-support, python (>=2.6)
+Standards-Version: 3.8.4
+Homepage: http://github.com/ilkka/maemogcalsync
+Vcs-Git: http://github.org/ilkka/maemogcalsync.git
+
+Package: maemogcalsync
+Architecture: all
+Depends: maemogcalsync-cli, ${misc:Depends}, ${python:Depends}
+Description: GUI for two-way sync of Maemo calendar with Google Calendar
+ This package contains the GUI for maemogcalsync. With the GUI the user can
+ set up authentication for the sync, manually start synchronization or
+ configure automatic periodic sync.
+
+Package: maemogcalsync-cli
+Architecture: all
+Depends: python-maemogcalsync, ${misc:Depends}, ${python:Depends}
+Description: CLI for two-way sync of Maemo calendar with Google Calendar
+ This package contains the command-line interface for maemogcalsync. With
+ the CLI the user can manually start synchronization.
+
+Package: python-maemogcalsync
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}
+Description: Python modules for two-way sync between Maemo and Google Calendar
+ This package contains the python modules for maemogcalsync. Install
+ maemogcalsync or maemogcalsync-cli to get a GUI or CLI.

@@ -1,0 +1,5 @@
+python-maemogcalsync (0.0.1-0ubuntu1) maverick; urgency=low
+
+  * Initial packaging
+
+ -- Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>  Fri, 12 Nov 2010 08:38:12 +0200
