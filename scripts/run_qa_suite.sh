@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-nosetests --with-doctest --with-coverage --cover-package=maemogcalsync --cover-erase --noexe \
-&& pep8 --show-source --show-pep8 --filename='*.py' maemogcalsync \
-&& pylint maemogcalsync
+SCRIPTDIR=$(dirname "$0")
+"$SCRIPTDIR/run_unit_tests.sh" && "$SCRIPTDIR/run_pep8_and_lint.sh"
