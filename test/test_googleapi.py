@@ -3,6 +3,7 @@ import unittest2 as unittest
 from datetime import datetime, timedelta
 
 from maemogcalsync import googleapi
+from maemogcalsync.event import Event
 
 class TestGoogleApi(unittest.TestCase):
     """Test suite class"""
@@ -20,6 +21,7 @@ class TestGoogleApi(unittest.TestCase):
         calendars = googleapi.get_user_calendars()
         events = googleapi.get_events_since(calendars[0], lastsync)
         self.assertGreater(len(events), 0)
+        self.assertIsInstance(events[0], Event)
 
 
 if __name__ == "__main__":
