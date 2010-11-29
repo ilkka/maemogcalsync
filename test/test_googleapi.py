@@ -17,12 +17,21 @@ class TestGoogleApi(unittest.TestCase):
 
         Fetches last 20 days of events. Probably has trouble if no events
         exist within the last 20 days."""
-        lastsync = datetime.utcnow() - timedelta(days=20)
+        lastsync = datetime.utcnow() - timedelta(days = 20)
         calendars = googleapi.get_user_calendars()
         events = googleapi.get_events_since(calendars[0], lastsync)
         self.assertGreater(len(events), 0)
         self.assertIsInstance(events[0], Event)
 
+    def test_create_event(self):
+        """Test creating a new event."""
+        ev = Event('Test event',
+                   begin = datetime.utcnow() + timedelta(hours = 2),
+                   end = datetime.utcnow() + timedelta(hours = 3),
+                   Event.Visibility.Private)
+        calendars = googleapi.get_user_calendars()
+        googleapi.create_event(calendars[0], ev)
+        
 
 if __name__ == "__main__":
     unittest.main()
