@@ -5,6 +5,7 @@ import random
 import logging
 import gdata.calendar
 import yaml
+import os.path
 
 
 Alphabet = 'abcdefghijlkmnopqrstuvwxyz0123456789'
@@ -18,9 +19,24 @@ Log = logging.getLogger('test.googleapi')
 
 
 class TestGoogleApi(unittest.TestCase):
-    """Test suite class"""
+    """Test suite class for googleapi module.
+    
+    Reads login credentials for the Google API from a file named
+    'test_credentials.yaml' in the project root dir. This file must exist."""
 
     def setUp(self):
+        cred_file_path = os.path.realpath(
+                os.path.join(os.path.dirname(__file__),
+                             '..', 'test_credentials.yaml'))
+        self.assertTrue(os.path.isfile(cred_file_path),
+                "Credentials file {0} must exist".format(cred_file_path))
+        cred_file = open(cred_file_path, 'r')
+        self.credentials = yaml.load(cred_file)
+        cred_file.close()
+
+        self.assertIsNotNone(self.credentials['username'])
+        self.assertIsNotNone(self.credentials['password'])
+
         self.calname = reduce(lambda x, y: x + y,
                               random.sample(Alphabet, 10),
                               "")
