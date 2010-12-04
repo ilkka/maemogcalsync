@@ -28,7 +28,7 @@ class TestGoogleApi(unittest.TestCase):
         ev = Event('Test event',
                    begin = datetime.utcnow() + timedelta(hours = 2),
                    end = datetime.utcnow() + timedelta(hours = 3),
-                   Event.Visibility.Private)
+                   visibility = Event.Visibility.Private)
         calendars = googleapi.get_user_calendars()
         googleapi.create_event(calendars[0], ev)
         
