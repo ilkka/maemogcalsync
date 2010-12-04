@@ -1,12 +1,32 @@
 """Unit test suite for the Google API part."""
 import unittest2 as unittest
 from datetime import datetime, timedelta
+import random
+import logging
+
+
+Alphabet = 'abcdefghijlkmnopqrstuvwxyz0123456789'
+
 
 from maemogcalsync import googleapi
 from maemogcalsync.event import Event
 
+
+Log = logging.getLogger('test.googleapi')
+
+
 class TestGoogleApi(unittest.TestCase):
     """Test suite class"""
+
+    def setUp(self):
+        self.calname = reduce(lambda x, y: x + y,
+                              random.sample(Alphabet, 10),
+                              "")
+        print("Creating test calendar \"{0}\"".format(self.calname))
+
+    def tearDown(self):
+        pass
+
     def test_get_user_calendars(self):
         """Test fetching users's calendars."""
         calendars = googleapi.get_user_calendars()
