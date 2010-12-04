@@ -3,6 +3,8 @@ import unittest2 as unittest
 from datetime import datetime, timedelta
 import random
 import logging
+import gdata.calendar
+import yaml
 
 
 Alphabet = 'abcdefghijlkmnopqrstuvwxyz0123456789'
@@ -22,10 +24,11 @@ class TestGoogleApi(unittest.TestCase):
         self.calname = reduce(lambda x, y: x + y,
                               random.sample(Alphabet, 10),
                               "")
-        print("Creating test calendar \"{0}\"".format(self.calname))
+        Log.info("Creating test calendar \"{0}\"".format(self.calname))
+        cal = gdata.calendar.CalendarListEntry()
 
     def tearDown(self):
-        pass
+        Log.info("Deleting test calendar \"{0}\"".format(self.calname))
 
     def test_get_user_calendars(self):
         """Test fetching users's calendars."""
