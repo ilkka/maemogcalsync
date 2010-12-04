@@ -26,12 +26,13 @@ class TestGoogleApi(unittest.TestCase):
     def test_create_event(self):
         """Test creating a new event."""
         ev = Event('Test event',
-                   begin = datetime.utcnow() + timedelta(hours = 2),
-                   end = datetime.utcnow() + timedelta(hours = 3),
+                   begin = datetime.utcnow() + timedelta(days = 10 * 365),
+                   end = datetime.utcnow() + timedelta(days = 10 * 365,
+                                                       hours = 3),
                    visibility = Event.Visibility.Private)
         calendars = googleapi.get_user_calendars()
         googleapi.create_event(calendars[0], ev)
-        
+
 
 if __name__ == "__main__":
     unittest.main()
