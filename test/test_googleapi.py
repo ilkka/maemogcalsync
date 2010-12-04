@@ -25,13 +25,16 @@ class TestGoogleApi(unittest.TestCase):
 
     def test_create_event(self):
         """Test creating a new event."""
-        ev = Event('Test event',
-                   begin = datetime.utcnow() + timedelta(days = 10 * 365),
-                   end = datetime.utcnow() + timedelta(days = 10 * 365,
-                                                       hours = 3),
-                   visibility = Event.Visibility.Private)
+        dt_begin = datetime.utcnow() + timedelta(days = 10 * 365)
+        dt_end = datetime.utcnow() + timedelta(days = 10 * 365, hours = 3)
+        dt_before = dt_begin - timedelta(days = 1)
         calendars = googleapi.get_user_calendars()
+        events_before = googleapi.get_events_since(calendars[0], dt_before)
+        ev = Event('Test event', begin = dt_begin, end = dt_end,
+                   visibility = Event.Visibility.Private)
         googleapi.create_event(calendars[0], ev)
+        events = googleapi.get_events_since(calendars[0], dt_before)
+        self.assertGreater(len(events), len(events_before))
 
 
 if __name__ == "__main__":
