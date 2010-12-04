@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import random
 import logging
 import gdata.calendar
+import gdata.calendar.service
 import yaml
 import os.path
 
@@ -36,6 +37,13 @@ class TestGoogleApi(unittest.TestCase):
 
         self.assertIsNotNone(self.credentials['username'])
         self.assertIsNotNone(self.credentials['password'])
+
+        Log.info("Logging in to service")
+        self.cal_service = gdata.calendar.service.CalendarService()
+        self.cal_service.email = self.credentials['username']
+        self.cal_service.password = self.credentials['password']
+        self.cal_service.source = 'Maemo_Gcal_Sync-0.1' # FIXME
+        self.cal_service.ProgrammaticLogin()
 
         self.calname = reduce(lambda x, y: x + y,
                               random.sample(Alphabet, 10),
