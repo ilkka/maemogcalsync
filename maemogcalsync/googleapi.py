@@ -1,7 +1,17 @@
 """Google API module of maemogcalsync.
 
 This module takes care of interfacing with the Google APIs."""
+import maemogcalsync
 from maemogcalsync.event import Event
+import gdata.calendar.service
+
+
+class Client(object):
+    def __init__(self, username, password):
+        self.service = gdata.calendar.service.CalendarService()
+        self.service.ClientLogin(username, password,
+                service="Maemo Gcal sync {0}".format(maemogcalsync.__version__))
+
 
 def get_events_since(calendar, last_sync):
     return [Event('event1'), Event('event2')]
