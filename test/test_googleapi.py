@@ -13,6 +13,7 @@ from mock import Mock, patch
 Alphabet = 'abcdefghijlkmnopqrstuvwxyz0123456789'
 
 
+import maemogcalsync
 from maemogcalsync import googleapi
 from maemogcalsync.event import Event
 
@@ -26,7 +27,7 @@ class TestGoogleApi(unittest.TestCase):
     @patch('gdata.calendar.service.CalendarService.ClientLogin')
     def test_login(self, mock):
         client = googleapi.Client('username@host', 'password')
-        mock.assert_called_with('username@host', 'password', service='Maemo Gcal sync 0.1')
+        mock.assert_called_with('username@host', 'password', service="Maemo Gcal sync {0}".format(maemogcalsync.__version__))
     
 
 if __name__ == "__main__":
