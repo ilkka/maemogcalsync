@@ -48,7 +48,7 @@ class TestGoogleApi(unittest.TestCase):
         run_once = False
         mock.side_effect = self.simulate_captcha_login
         client = googleapi.Client('username@host', 'password')
-        self.assertEqual(2, len(mock.method_calls))
+        self.assertEqual(2, mock.call_count)
 
 
 if __name__ == "__main__":
