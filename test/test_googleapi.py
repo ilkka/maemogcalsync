@@ -29,7 +29,7 @@ class TestGoogleApi(unittest.TestCase):
         """Set up fixture"""
         self.captcha_error_thrown = False
 
-    def simulate_captcha_login(self, username, password, **kwargs):
+    def simulate_captcha_login(self, *args, **kwargs):
         """This method is a side effect for test_captcha_login"""
         if self.captcha_error_thrown:
             return None
