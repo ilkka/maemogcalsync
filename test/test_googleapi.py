@@ -32,6 +32,8 @@ class TestGoogleApi(unittest.TestCase):
     def simulate_captcha_login(self, *args, **kwargs):
         """This method is a side effect for test_captcha_login"""
         if self.captcha_error_thrown:
+            self.assertIn('captcha_token', kwargs.keys())
+            self.assertIn('captcha_response', kwargs.keys())
             return None
         self.captcha_error_thrown = True
         raise gdata.service.CaptchaRequired
@@ -46,6 +48,7 @@ class TestGoogleApi(unittest.TestCase):
         run_once = False
         mock.side_effect = self.simulate_captcha_login
         client = googleapi.Client('username@host', 'password')
+        self.assertEqual(2, len(mock.method_calls))
 
 
 if __name__ == "__main__":
