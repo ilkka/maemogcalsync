@@ -41,7 +41,9 @@ class TestGoogleApi(unittest.TestCase):
     @patch('gdata.calendar.service.CalendarService.ClientLogin')
     def test_login(self, mock):
         client = googleapi.Client('username@host', 'password')
-        mock.assert_called_with('username@host', 'password', service="Maemo Gcal sync {0}".format(maemogcalsync.__version__))
+        mock.assert_called_with('username@host', 'password',
+                captcha_token=None, captcha_response=None,
+                service="Maemo Gcal sync {0}".format(maemogcalsync.__version__))
     
     @patch('gdata.calendar.service.CalendarService.ClientLogin')
     def test_captcha_login(self, mock):

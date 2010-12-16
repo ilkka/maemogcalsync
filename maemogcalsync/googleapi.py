@@ -18,8 +18,8 @@ class Client(object):
         except gdata.service.CaptchaRequired:
             print("Visit {0} and call again with captcha_response " + \
                     "and captcha_token={1}" \
-                    .format(self.service.captcha_url) \
-                    .format(self.service.captcha_token))
+                    .format(self.service.captcha_url, \
+                            self.service.captcha_token))
             raise
 
 def get_events_since(calendar, last_sync):
