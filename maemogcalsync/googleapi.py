@@ -12,7 +12,7 @@ class Client(object):
         self.service = gdata.calendar.service.CalendarService()
         try:
             self.service.ClientLogin(username, password,
-                    service="Maemo Gcal sync {0}".format(maemogcalsync.__version__),
+                    source="Maemo_Gcal_sync_{0}".format(maemogcalsync.__version__),
                     captcha_token=captcha_token,
                     captcha_response=captcha_response)
         except gdata.service.CaptchaRequired:
