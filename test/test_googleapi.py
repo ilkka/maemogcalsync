@@ -49,7 +49,9 @@ class TestGoogleApi(unittest.TestCase):
     def test_captcha_login(self, mock):
         run_once = False
         mock.side_effect = self.simulate_captcha_login
-        client = googleapi.Client('username@host', 'password')
+        with self.assertRaises(gdata.service.CaptchaRequired):
+            googleapi.Client('username@host', 'password')
+        googleapi.Client('username@host', 'password', 'captchatoken', 'captcharesponse')
         self.assertEqual(2, mock.call_count)
 
 
